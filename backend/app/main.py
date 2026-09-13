@@ -63,6 +63,15 @@ async def root():
     return {"message": f"Welcome to {settings.PROJECT_NAME} API. Visit /docs for API specifications."}
 
 
+@app.get(settings.API_V1_STR, tags=["Root"])
+async def api_v1_root():
+    return {
+        "message": f"Welcome to {settings.PROJECT_NAME} API v1",
+        "docs": "/docs",
+        "status": "operational",
+    }
+
+
 # ── Register API routers under /api/v1 ────────────────────────────────────────
 
 PREFIX = settings.API_V1_STR   # "/api/v1"
