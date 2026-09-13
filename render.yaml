@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-civic-guardian-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && alembic upgrade head && python -m app.db.seed
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ENVIRONMENT
+        value: production
+      - key: CLASSIFICATION_PROVIDER
+        value: mobilenet
+      - key: STT_PROVIDER
+        value: whisper
+      - key: GEOCODING_PROVIDER
+        value: nominatim
+      - key: SECRET_KEY
+        generateValue: true
